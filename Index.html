@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Dark background */
+            color: #ff4d6d; /* Heart pink/red color */
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #typewriter {
+            font-size: 1.5rem;
+            max-width: 80%;
+            line-height: 1.6;
+            z-index: 10;
+        }
+
+        /* Falling Hearts Animation *
+        .heart {
+            position: absolute;
+            top: -10%;
+            font-size: 20px;
+            user-select: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="typewriter"></div>
+
+    <script>
+        // 1. SET YOUR TEXT HERE
+        const message = "Every letter is magic✨...\n\n how is this!??";
+        
+        const speed = 100; // Speed in milliseconds
+        let i = 0;
+
+        function typeWriter() {
+            if (i < message.length) {
+                document.getElementById("typewriter").innerHTML += message.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        // 2. CREATE FALLING HEARTS
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️'; // You can change this to 💖 or 💘
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2-5 seconds
+            heart.style.opacity = Math.random();
+            
+            document.body.appendChild(heart);
+
+            // Remove heart after it falls to keep the page fast
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Start effects
+        setInterval(createHeart, 300);
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>
